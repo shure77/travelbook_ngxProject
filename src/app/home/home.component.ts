@@ -4,8 +4,7 @@ import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/l
 
 import { QuoteService } from './quote.service';
 import { Subscription } from 'rxjs';
-import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
-import { Address } from 'ngx-google-places-autocomplete/objects/address';
+import {} from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
 
 @Component({
@@ -14,8 +13,7 @@ import { MapsAPILoader } from '@agm/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  @ViewChild('search', { static: false })
-  public searchElementRef: ElementRef;
+  @ViewChild('search', { static: false }) public searchElementRef: ElementRef; // get the DOM input element for autocomplete
 
   quote: string | undefined;
   isLoading = false;
@@ -23,6 +21,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   observersubscription: Subscription;
 
+  // inject MapsAPILoader and NgZone (for asynchronous operations outside the angular zone) for Google autocomplete
   constructor(
     private quoteService: QuoteService,
     private breakpointobserver: BreakpointObserver,
@@ -43,22 +42,22 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.quote = quote;
       });
 
-    //setup subscription to detect the kind of device
+    // setup subscription to detect the kind of device
     this.observersubscription = this.breakpointobserver
       .observe([Breakpoints.Small, Breakpoints.Handset])
       .subscribe((result: BreakpointState) => {
         this.isMobile = result.matches;
       });
 
-    //load Places Autocomplete
+    // load Places Autocomplete, returns a promise
     this.mapsAPILoader.load().then(() => {
       const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
       autocomplete.addListener('place_changed', () => {
         this.ngZone.run(() => {
-          //get the place result
-          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+          // get the place result
+          const place: google.maps.places.PlaceResult = autocomplete.getPlace();
 
-          //verify result
+          // verify result
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }

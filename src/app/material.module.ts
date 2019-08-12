@@ -48,6 +48,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
+import { NgMatSearchBarModule } from 'ng-mat-search-bar';
 
 @NgModule({
   exports: [
@@ -89,7 +90,8 @@ import { MatTreeModule } from '@angular/material/tree';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatTreeModule
+    MatTreeModule,
+    NgMatSearchBarModule
   ]
 })
 export class MaterialModule {}

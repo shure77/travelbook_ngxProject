@@ -1,11 +1,12 @@
 import { Title } from '@angular/platform-browser';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 import { AuthenticationService, CredentialsService, I18nService } from '@app/core';
 import { Subscription } from 'rxjs';
+import { MatSearchBarComponent } from 'ng-mat-search-bar/src/app/ng-mat-search-bar/mat-search-bar/mat-search-bar.component';
 
 @Component({
   selector: 'app-header',
@@ -14,9 +15,11 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
   @Input() sidenav!: MatSidenav;
+  @ViewChild('searchBar', {static: false}) public searchBar: ElementRef<MatSearchBarComponent>;
 
   isMobile: boolean;
   observerSubscription: Subscription;
+  searchBarVisible: boolean;
 
   constructor(
     private router: Router,
@@ -59,4 +62,13 @@ export class HeaderComponent implements OnInit {
   get title(): string {
     return this.titleService.getTitle();
   }
+
+  handleOpen(){
+    this.searchBarVisible = (this.searchBar as MatSearchBarComponent).searchVisible;
+  }
+
+  handleClose(){
+    this.searchBarVisible = this.searchBar.searchVisible;
+  }
+
 }
