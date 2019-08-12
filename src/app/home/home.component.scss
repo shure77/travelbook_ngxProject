@@ -1,0 +1,47 @@
+.container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  width: 150px;
+  margin: 0 auto;
+}
+
+q {
+  font-style: italic;
+  quotes: "« " " »";
+}
+
+.createplace-form {
+  width: 50%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.appTitle {
+  font-size: 90px;
+}
+
+.headerbkg {
+  width: 100%;
+  background-color: #ffffff;
+  position: fixed;
+  top: 10%;
+  height: 53px;
+  z-index: 1;
+}
+
+.mat-form-field {
+  font-size: 24px;
+}
+
+.addCityButton {
+  border-radius: 25px;
+  font-weight: 400;
+  position: fixed;
+  bottom: 5%;
+}
