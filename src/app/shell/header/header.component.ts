@@ -71,4 +71,6 @@ export class HeaderComponent implements OnInit {
     this.searchBarVisible = this.searchBar.searchVisible;
   }
 
+  test() {}
+
 }
