@@ -5,14 +5,22 @@
     </button>
     <span *ngIf="!searchBarVisible" class="title">{{ title }}</span>
   </div>
-  <div fxHide.lt-md>
+  <!-- <div fxHide.lt-md>
     <button mat-icon-button routerLink="" routerLinkActive="active">
       <mat-icon>arrow_back</mat-icon>
     </button>
     <a class="brand" routerLink="" routerLinkActive="active" translate>APP_NAME</a>
-  </div>
+  </div> -->
   <span fxFlex></span>
-  <mat-search-bar #searchBar [ngClass]="{fieldWidth: searchBarVisible}" (onOpen)="handleOpen()" (onClose)="handleClose()"></mat-search-bar>
+  <mat-form-field  [ngStyle]="{'display': displayStyle}" class="example-full-width">
+    <input matInput placeholder="Enter place name" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #searchToolbar>
+  </mat-form-field>
+  <button *ngIf="!searchBarVisible" mat-icon-button (click)="triggerSearchbarOn()">
+    <mat-icon>search</mat-icon>
+  </button>
+  <button *ngIf="searchBarVisible" mat-icon-button (click)="triggerSearchbarOff()">
+    <mat-icon>close</mat-icon>
+  </button>
   <button mat-icon-button [matMenuTriggerFor]="userMenu">
     <mat-icon>person</mat-icon>
   </button>

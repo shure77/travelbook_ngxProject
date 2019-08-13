@@ -1,0 +1,33 @@
+<div class="mdc-layout-grid__inner">
+  <div class="mdc-layout-grid__cell--span-12">
+    <div class="mdc-layout-grid__inner">
+      <div class="mdc-layout-grid__cell--span-12">
+        <mat-toolbar>
+              <span><h1>Create a new place</h1></span>
+              <span class="fill-remaining-space"></span>
+              <button class="btn-dialog-close" mat-button (click)="onClose()" tabIndex="-1">
+                <mat-icon>clear</mat-icon>
+              </button>
+        </mat-toolbar>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mdc-layout-grid__cell--span-12 createplace-form">
+  <div class="container">
+    <form class="full-width">
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          placeholder="Enter place name"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="off"
+          type="text"
+          #search
+        />
+      </mat-form-field>
+    </form>
+  </div>
+</div>

@@ -6,6 +6,8 @@ import { QuoteService } from './quote.service';
 import { Subscription } from 'rxjs';
 import {} from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
+import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
+import { CreatePlaceComponent } from '@app/create-place/create-place.component';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +15,7 @@ import { MapsAPILoader } from '@agm/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  @ViewChild('search', { static: false }) public searchElementRef: ElementRef; // get the DOM input element for autocomplete
+@ViewChild('search', { static: false }) public searchElementRef: ElementRef; // get the DOM input element for autocomplete
 
   quote: string | undefined;
   isLoading = false;
@@ -26,7 +28,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     private quoteService: QuoteService,
     private breakpointobserver: BreakpointObserver,
     private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -68,5 +71,14 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.observersubscription.unsubscribe;
+  }
+
+  openCreateDialog(){
+    const dialogConfig = new MatDialogConfig;
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '80%';
+    dialogConfig.position = {'top': '20%'};
+    this.dialog.open(CreatePlaceComponent, dialogConfig);
   }
 }

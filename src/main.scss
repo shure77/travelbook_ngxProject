@@ -34,3 +34,17 @@ h1 {
 .mat-drawer-container {
   background-color: #ffffff;
 }
+
+.container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.fill-remaining-space {
+  flex: 1 1 auto;
+}
