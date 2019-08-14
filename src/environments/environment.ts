@@ -16,7 +16,17 @@ export const environment = {
   version: env.npm_package_version + '-dev',
   serverUrl: '/api',
   defaultLanguage: 'en-US',
-  supportedLanguages: ['en-US', 'fr-FR']
+  supportedLanguages: ['en-US', 'fr-FR'],
+  firebaseConfig:
+  {
+    apiKey: "AIzaSyDMoTcfNsLG33O6zIgfaMm9wVwXTz9rGPo",
+    authDomain: "travelbookcrud.firebaseapp.com",
+    databaseURL: "https://travelbookcrud.firebaseio.com",
+    projectId: "travelbookcrud",
+    storageBucket: "travelbookcrud.appspot.com",
+    messagingSenderId: "813911819276",
+    appId: "1:813911819276:web:f775b86dec498f04"
+  }
 };
 
 /*
