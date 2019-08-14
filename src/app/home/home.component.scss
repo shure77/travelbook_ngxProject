@@ -14,15 +14,20 @@ q {
 
 .appTitle {
   font-size: 90px;
+  margin-top: 90px;
 }
 
 .headerbkg {
   width: 100%;
   background-color: #ffffff;
   position: fixed;
-  top: 10%;
-  height: 53px;
+  top: 0px;
+  height: 145px;
   z-index: 1;
+}
+
+.mainContent {
+  margin-top: 2%;
 }
 
 .mat-form-field {

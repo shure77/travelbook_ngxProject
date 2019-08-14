@@ -6,8 +6,8 @@
       </div>
     </div>
   </div>
-  <div *ngIf="!isMobile" class="mdc-layout-grid__cell--span-12">
-    <div class="container">
+  <div  [ngStyle]="{display: isMobile ? 'none' : 'block'}" class="mdc-layout-grid__cell--span-12">
+    <div class="container mainContent">
       <form class="createplace-form">
         <h1>Create a new place</h1>
         <mat-form-field class="full-width">

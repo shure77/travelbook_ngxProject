@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, NgZone, AfterViewInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
@@ -14,12 +14,12 @@ import { CreatePlaceComponent } from '@app/create-place/create-place.component';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 @ViewChild('search', { static: false }) public searchElementRef: ElementRef; // get the DOM input element for autocomplete
 
   quote: string | undefined;
   isLoading = false;
-  isMobile = false;
+  isMobile: boolean;
 
   observersubscription: Subscription;
 
@@ -44,13 +44,16 @@ export class HomeComponent implements OnInit, OnDestroy {
       .subscribe((quote: string) => {
         this.quote = quote;
       });
-
-    // setup subscription to detect the kind of device
+          // setup subscription to detect the kind of device
     this.observersubscription = this.breakpointobserver
-      .observe([Breakpoints.Small, Breakpoints.Handset])
-      .subscribe((result: BreakpointState) => {
-        this.isMobile = result.matches;
-      });
+    .observe([Breakpoints.Small, Breakpoints.Handset])
+    .subscribe((result: BreakpointState) => {
+      this.isMobile = result.matches;
+    });
+  }
+
+  ngAfterViewInit() {
+
 
     // load Places Autocomplete, returns a promise
     this.mapsAPILoader.load().then(() => {
