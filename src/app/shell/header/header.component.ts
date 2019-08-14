@@ -1,12 +1,12 @@
 import { Title } from '@angular/platform-browser';
-import { Component, OnInit, Input, ViewChild, ElementRef, NgZone, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 import { AuthenticationService, CredentialsService, I18nService } from '@app/core';
 import { Subscription } from 'rxjs';
-import { MapsAPILoader } from '@agm/core';
+import { SearchDataService } from '@app/shared/searchData.service';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +15,8 @@ import { MapsAPILoader } from '@agm/core';
 })
 export class HeaderComponent implements OnInit, OnChanges {
   @Input() sidenav!: MatSidenav;
-  @ViewChild('searchToolbar', { static: false }) public searchElementRef: ElementRef;
+  searchText: string;
+  @ViewChild('searchInput', {static: false}) searchInput: ElementRef;
 
   isMobile: boolean;
   observerSubscription: Subscription;
@@ -29,8 +30,7 @@ export class HeaderComponent implements OnInit, OnChanges {
     private credentialsService: CredentialsService,
     private i18nService: I18nService,
     private breakpointObserver: BreakpointObserver,
-    private mapsAPILoaderTb: MapsAPILoader,
-    private ngZoneTb: NgZone
+    private searchData: SearchDataService
   ) {}
 
   ngOnInit() {
@@ -39,23 +39,9 @@ export class HeaderComponent implements OnInit, OnChanges {
       .subscribe((state: BreakpointState) => {
         this.isMobile = state.matches;
       });
-      this.mapsAPILoaderTb.load().then(() => {
-        const autocompleteTb = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
-        autocompleteTb.addListener('place_changed', () => {
-          this.ngZoneTb.run(() => {
-            // get the place result
-            const placeTb: google.maps.places.PlaceResult = autocompleteTb.getPlace();
-            // verify result
-            if (placeTb.geometry === undefined || placeTb.geometry === null) {
-              return;
-            }
-          });
-        });
-      });
   }
 
   ngOnChanges() {
-    
   }
 
   setLanguage(language: string) {
@@ -89,8 +75,14 @@ export class HeaderComponent implements OnInit, OnChanges {
   }
 
   triggerSearchbarOff(){
+    this.searchInput.nativeElement.value = '';
     this.searchBarVisible = !this.searchBarVisible;
     this.displayStyle = 'none';  
-    this.searchElementRef.nativeElement.value = ''; 
+    this.searchData.changeSearchData('');
+  }
+
+  onKey(event: any) {
+    this.searchText = event.target.value;
+    this.searchData.changeSearchData(this.searchText);
   }
 }

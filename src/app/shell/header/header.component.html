@@ -13,7 +13,7 @@
   </div> -->
   <span fxFlex></span>
   <mat-form-field  [ngStyle]="{'display': displayStyle}" class="example-full-width">
-    <input matInput placeholder="Enter place name" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #searchToolbar>
+    <input matInput placeholder="Search your places" (keyup)="onKey($event)" #searchInput name="searchInput">
   </mat-form-field>
   <button *ngIf="!searchBarVisible" mat-icon-button (click)="triggerSearchbarOn()">
     <mat-icon>search</mat-icon>
