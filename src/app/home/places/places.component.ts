@@ -3,6 +3,8 @@ import { Place } from '@app/models/place';
 import { PlacesService } from '@app/places.service';
 import { SearchDataService } from '@app/shared/searchData.service';
 import { Subscription } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
+import { isTemplateElement } from 'babel-types';
 
 @Component({
   selector: 'app-places',
@@ -14,12 +16,25 @@ export class PlacesComponent implements OnInit, OnDestroy {
   searchText: string;
   subscription: Subscription;
 
-  constructor(private placesService: PlacesService,
-              private searchTextService: SearchDataService) {}
+  constructor(private placesService: PlacesService, private searchTextService: SearchDataService) {}
 
   ngOnInit() {
-    this.places = this.placesService.getPlaces();
-    this.subscription = this.searchTextService.currentSearchData.subscribe((searchText) => this.searchText = searchText);
+    this.placesService.getPlacesFb()
+      .pipe(
+        map(list => list.map((val) => ({$key: val.key, ...val.payload.val()}))), // create objects from firebaseList
+        map(unsortedList => unsortedList.sort(
+          (a,b) => {
+            const c = new Date(a.placeVisited).getTime();
+            const d = new Date(b.placeVisited).getTime();
+            return d - c;
+          }
+        )) // sort the list by time visited
+        )
+      .subscribe(sortedList => this.places = sortedList);
+
+    this.subscription = this.searchTextService.currentSearchData.subscribe(
+      searchText => (this.searchText = searchText)
+    );
   }
 
   ngOnDestroy() {
