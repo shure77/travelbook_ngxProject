@@ -4,4 +4,5 @@ export class Place {
     public placeCountry: string;
     public placeVisited: string;
     public placeImageUrl: string;
+    public placeNotes: string;
 }

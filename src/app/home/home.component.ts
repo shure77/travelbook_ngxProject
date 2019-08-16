@@ -81,7 +81,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '80%';
-    dialogConfig.position = {'top': '20%'};
+    dialogConfig.position = {'top': '2%'};
     this.dialog.open(CreatePlaceComponent, dialogConfig);
   }
 }
