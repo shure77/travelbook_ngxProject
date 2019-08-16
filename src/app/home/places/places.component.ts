@@ -31,7 +31,6 @@ export class PlacesComponent implements OnInit, OnDestroy {
         )) // sort the list by time visited
         )
       .subscribe(sortedList => this.places = sortedList);
-
     this.subscription = this.searchTextService.currentSearchData.subscribe(
       searchText => (this.searchText = searchText)
     );
@@ -39,5 +38,9 @@ export class PlacesComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe;
+  }
+
+  onDelete($key: any){
+    this.placesService.deletePlace($key);
   }
 }

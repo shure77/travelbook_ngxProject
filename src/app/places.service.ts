@@ -54,15 +54,16 @@ export class PlacesService {
   // updatePlace(place: any) {
   //   this.placesList.update(place.$key, 
   //     {
-  //       placeName: place.placeName,
-  //       placeRegion: place.placeRegion,
-  //       placeCountry: place.placeCountry,
-  //       placeVisited: place.placeVisited,
-  //       placeImageUrl: place.placeImageUrl 
+  //     placeName: place.placeName,
+  //     placeRegion: place.placeRegion,
+  //     placeCountry: place.placeCountry,
+  //     placeVisited: place.placeVisited.toString(),
+  //     placeImageUrl: place.placeImageUrl,
+  //     placeNotes: place.placeNotes
   //     });
   // }
 
-  // deletePlace($key: string) {
-  //   this.placesList.remove($key);
-  // }
+  deletePlace($key: string) {
+    this.placesList.remove($key);
+  }
 }
