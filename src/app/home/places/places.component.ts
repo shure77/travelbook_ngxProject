@@ -1,10 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Place } from '@app/models/place';
 import { PlacesService } from '@app/places.service';
 import { SearchDataService } from '@app/shared/searchData.service';
 import { Subscription } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-import { isTemplateElement } from 'babel-types';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-places',
