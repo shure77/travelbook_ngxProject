@@ -16,9 +16,10 @@ import { MapsAPILoader } from '@agm/core';
 })
 class MockPlacesComponent {}
 
-describe('HomeComponent', () => {
+fdescribe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
+  let elements: HTMLElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -44,6 +45,7 @@ describe('HomeComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
+    elements = fixture.nativeElement;
     fixture.detectChanges();
   });
 
@@ -51,10 +53,15 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  fit('should contain app-places directive', () => {
-    const element: HTMLElement = fixture.nativeElement;
-    const appPlaces = element.querySelector('app-places');
+  it('should contain app-places directive', () => {
+    const appPlaces = elements.querySelector('app-places');
     
     expect(appPlaces).toBeTruthy();
   });
+
+  it('should render add button', () => {
+    const addButton = elements.querySelector('button');
+    
+    expect(addButton).toBeTruthy();
+  })
 });
