@@ -2,22 +2,26 @@
 @import "../../../theme/theme.scss";
 
 .example-card {
-  max-width: 400px;
+
 }
 
 .example-header-image {
   background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
   background-size: cover;
 }
+::ng-deep .mat-card-header-text {
+  width: 80%;
+}
 
-.mat-card {
+mat-card {
   text-align: left;
   margin-bottom: 15px;
+  min-width: 0;
 
   .mat-card-title {
     color: mat-color($app-primary);
   }
-  
+
   .mat-card-content {
     margin: 0 16px;
     p {
@@ -28,10 +32,23 @@
   }
 
   .mat-card-actions {
-      button { 
-          left: 10px;
-          font-size: 20px;
-          color: mat-color($app-primary);
-      }  
+    button {
+      left: 10px;
+      font-size: 20px;
+      color: mat-color($app-primary);
+    }
+  }
+
+  .mat-card-image {
+    min-height: 20vh;
+    max-height: 20vh;
+    object-fit: cover;
+  }
+
+  .mat-card-subtitle {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
   }
 }

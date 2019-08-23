@@ -63,5 +63,15 @@ fdescribe('HomeComponent', () => {
     const addButton = elements.querySelector('button');
     
     expect(addButton).toBeTruthy();
+  });
+
+  it('should hide createPlaceForm if isMobile is true', () => {
+    let isMobileState = component.isMobile;
+    isMobileState = false;
+
+    fixture.detectChanges();
+    const createPlaceForm = elements.querySelector('.createPlaceForm');
+    
+    console.log(createPlaceForm);
   })
 });

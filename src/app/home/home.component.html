@@ -1,27 +1,31 @@
-<div class="mdc-layout-grid__inner">
-  <div *ngIf="!isMobile" class="mdc-layout-grid__cell--span-12">
-    <div class="container">
-      <div class="headerbkg">
-        <h1 class="appTitle">Travelbook</h1>
+<div class="mdc-layout-grid">
+  <div class="mdc-layout-grid__inner">
+    <div *ngIf="!isMobile" class="mdc-layout-grid__cell--span-12">
+      <div class="container">
+        <div class="headerbkg">
+          <h1 class="appTitle">Travelbook</h1>
+        </div>
       </div>
     </div>
   </div>
-  <div  [ngStyle]="{display: isMobile ? 'none' : 'block'}" class="mdc-layout-grid__cell--span-12">
-    <div class="container mainContent">
-      <form class="createplace-form">
-        <h1>Create a new place</h1>
-        <mat-form-field class="full-width">
-          <input
-            matInput
-            placeholder="Enter place name"
-            autocorrect="off"
-            autocapitalize="off"
-            spellcheck="off"
-            type="text"
-            #search
-          />
-        </mat-form-field>
-      </form>
+  <div class="mdc-layout-grid__inner">
+    <div [ngStyle]="{ display: isMobile ? 'none' : 'block' }" class="mdc-layout-grid__cell--span-12 createPlaceForm">
+      <div class="container mainContent">
+        <form class="createplace-form">
+          <h1>Create a new place</h1>
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="Enter place name"
+              autocorrect="off"
+              autocapitalize="off"
+              spellcheck="off"
+              type="text"
+              #search
+            />
+          </mat-form-field>
+        </form>
+      </div>
     </div>
   </div>
 
@@ -41,26 +45,24 @@
       </mat-card>
     </div>
   </div> -->
-  <div class="mdc-layout-grid__cell--span-12">
-    <div class="container">
       <app-places></app-places>
-    </div>
-  </div>
 
-  <div *ngIf="isMobile" class="mdc-layout-grid__cell--span-12">
-    <div class="container">
-      <button
-        class="addCityButton"
-        mat-raised-button
-        color="primary"
-        secondary
-        raised
-        aria-label="add city button"
-        (click)="openCreateDialog()"
-      >
-        <mat-icon>add</mat-icon>
-        ADD CITY
-      </button>
+  <div class="mdc-layout-grid__inner">
+    <div *ngIf="isMobile" class="mdc-layout-grid__cell--span-12">
+      <div class="container">
+        <button
+          class="addCityButton"
+          mat-raised-button
+          color="primary"
+          secondary
+          raised
+          aria-label="add city button"
+          (click)="openCreateDialog()"
+        >
+          <mat-icon>add</mat-icon>
+          ADD CITY
+        </button>
+      </div>
     </div>
   </div>
 </div>
