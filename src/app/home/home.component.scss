@@ -1,3 +1,5 @@
+@import "../../theme/theme-variables.scss";
+
 .logo {
   width: 150px;
   margin: 0 auto;
@@ -14,16 +16,7 @@ q {
 
 .appTitle {
   font-size: 90px;
-  margin-top: 90px;
-}
-
-.headerbkg {
-  width: 100%;
-  background-color: #ffffff;
-  position: fixed;
-  top: 0px;
-  height: 145px;
-  z-index: 1;
+  /* margin-top: 90px; */
 }
 
 .mainContent {
@@ -35,8 +28,9 @@ q {
 }
 
 .addCityButton {
-  border-radius: 25px;
   font-weight: 400;
   position: fixed;
-  bottom: 5%;
+  bottom: 16px;
+  right: 16px;
+  
 }

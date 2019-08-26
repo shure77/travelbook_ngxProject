@@ -1,17 +1,11 @@
-<mat-toolbar *ngIf="isMobile" class="mat-elevation-z6 navbar" color="primary">
+<mat-toolbar *ngIf="isMobile" class="mat-elevation-z6 navbar" color="accent">
   <div fxHide.gt-sm fxLayoutAlign="start center">
     <button class="menu-button" mat-icon-button (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
     <span *ngIf="!searchBarVisible" class="title">{{ title }}</span>
   </div>
-  <!-- <div fxHide.lt-md>
-    <button mat-icon-button routerLink="" routerLinkActive="active">
-      <mat-icon>arrow_back</mat-icon>
-    </button>
-    <a class="brand" routerLink="" routerLinkActive="active" translate>APP_NAME</a>
-  </div> -->
-  <span fxFlex></span>
+   <span fxFlex></span>
   <mat-form-field  [ngStyle]="{'display': displayStyle}" class="example-full-width">
     <input matInput placeholder="Search your places" (keyup)="onKey($event)" #searchInput name="searchInput">
   </mat-form-field>

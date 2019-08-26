@@ -1,79 +1,77 @@
 <div class="mdc-layout-grid__inner">
   <div class="mdc-layout-grid__cell--span-12">
-    <div class="mdc-layout-grid__inner">
-      <div class="mdc-layout-grid__cell--span-12">
-        <mat-toolbar>
-          <span><h1>Create a new place</h1></span>
-          <span class="fill-remaining-space"></span>
-          <button class="btn-dialog-close" mat-button (click)="onClose()" tabIndex="-1">
-            <mat-icon>clear</mat-icon>
-          </button>
-        </mat-toolbar>
-      </div>
-    </div>
+    <mat-toolbar color="accent">
+      <h1>Create a new place</h1>
+      <span class="fill-remaining-space"></span>
+      <button class="btn-dialog-close" mat-button (click)="onClose()" tabIndex="-1">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-toolbar>
   </div>
 </div>
 
-<div class="mdc-layout-grid__cell--span-12 createplace-form">
-  <div class="container">
-    <form class="full-width">
+<div class="mdc-layout-grid__inner">
+  <div class="mdc-layout-grid__cell--span-12 createplace-form">
+    <div class="container">
+      <form class="full-width">
+        <mat-form-field class="full-width">
+          <input
+            matInput
+            placeholder="Enter place name"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="off"
+            type="text"
+            #search
+          />
+        </mat-form-field>
+      </form>
+    </div>
+  </div>
+
+  <form [formGroup]="placeService.form" class="full-width mdc-layout-grid__cell--span-12" (submit)="onSubmit()">
+      <div class="mdc-layout-grid__inner">
+    <input type="hidden" formControlName="$key" />
+    <div class="mdc-layout-grid__cell--span-12">
       <mat-form-field class="full-width">
-        <input
-          matInput
-          placeholder="Enter place name"
-          autocorrect="off"
-          autocapitalize="off"
-          spellcheck="off"
-          type="text"
-          #search
-        />
+        <input matInput placeholder="Place Name" formControlName="placeName" />
       </mat-form-field>
-    </form>
-  </div>
-</div>
-
-<div class="mdc-layout-grid__cell--span-12">
-  <form [formGroup]="placeService.form" class="full-width" (submit)="onSubmit()">
-      <input type="hidden" formControlName="$key">
-    <div class="mdc-layout-grid__inner">
-      <div class="mdc-layout-grid__cell--span-6
-                  mdc-layout-grid__cell--span-4-tablet">
-        <mat-form-field class="full-width">
-          <input matInput placeholder="Place Name" formControlName="placeName" />
-        </mat-form-field>
-      </div>
-      <div class="mdc-layout-grid__cell--span-6
-      mdc-layout-grid__cell--span-4-tablet">
-        <mat-form-field class="full-width">
-          <input matInput placeholder="Place Region" formControlName="placeRegion" />
-        </mat-form-field>
-      </div>
-      <div class="mdc-layout-grid__cell--span-12">
-        <mat-form-field class="full-width">
-          <input matInput placeholder="Place Country" formControlName="placeCountry" />
-        </mat-form-field>
-      </div>
-      <div class="mdc-layout-grid__cell--span-6">
-        <mat-form-field class="full-width">
-            <input matInput [matDatepicker]="picker" placeholder="Time visited" formControlName="placeVisited">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-      </div>
-      <div class="mdc-layout-grid__cell--span-6">
-        <mat-form-field class="full-width">
-          <input matInput placeholder="Place Image" formControlName="placeImageUrl" />
-        </mat-form-field>
-      </div>
-      <div class="mdc-layout-grid__cell--span-12">
-        <mat-form-field class="full-width">
-          <textarea matInput placeholder="Place Notes" formControlName="placeNotes" ></textarea>
-        </mat-form-field>
-      </div>
     </div>
+    <div class="mdc-layout-grid__cell--span-6-desktop
+    mdc-layout-grid__cell--span-4-tablet
+    mdc-layout-grid__cell--span-4-phone">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Place Region" formControlName="placeRegion" />
+      </mat-form-field>
+    </div>
+    <div class="mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Place Country" formControlName="placeCountry" />
+      </mat-form-field>
+    </div>
+    <div class="mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+      <mat-form-field class="full-width">
+        <input matInput [matDatepicker]="picker" placeholder="Time visited" formControlName="placeVisited" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Place Image" formControlName="placeImageUrl" />
+      </mat-form-field>
+    </div>
+    <div class="mdc-layout-grid__cell--span-12">
+      <mat-form-field class="full-width">
+        <textarea matInput placeholder="Place Notes" formControlName="placeNotes"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="mdc-layout-grid__cell--span-12">
     <div class="button-row">
-    <button mat-stroked-button color="primary" (click)="onClear()">Clear</button>
-    <button mat-raised-button color="primary" type="submit">Submit</button>
+      <button mat-stroked-button color="accent" type="reset" (click)="onClear()">Clear</button>
+      <button mat-raised-button color="accent" type="submit">Submit</button>
+    </div>
+  </div>
   </div>
   </form>
 </div>

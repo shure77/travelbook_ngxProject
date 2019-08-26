@@ -63,7 +63,5 @@ export class CreatePlaceComponent implements OnInit {
 
   onClear() {
     this.searchElementRef.nativeElement.value = '';
-    this.placeService.form.reset();
-    this.placeService.initializeForm();
   }
 }
