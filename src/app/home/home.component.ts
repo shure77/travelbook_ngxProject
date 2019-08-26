@@ -8,6 +8,9 @@ import {} from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { CreatePlaceComponent } from '@app/create-place/create-place.component';
+import { PlacesService } from '@app/places.service';
+import { PlaceDataService } from '@app/shared/placeData.service';
+import { PlacesphotoService } from '@app/placesphoto.service';
 
 @Component({
   selector: 'app-home',
@@ -29,7 +32,10 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     private breakpointobserver: BreakpointObserver,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private placeDataService: PlaceDataService,
+    private placeService: PlacesService,
+    private placesphotoService: PlacesphotoService
   ) {}
 
   ngOnInit() {
@@ -53,8 +59,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-
-
     // load Places Autocomplete, returns a promise
     this.mapsAPILoader.load().then(() => {
       const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
@@ -62,11 +66,24 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         this.ngZone.run(() => {
           // get the place result
           const place: google.maps.places.PlaceResult = autocomplete.getPlace();
+          this.openCreateDialog();
 
           // verify result
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
+          this.placeService.initializeForm();
+          this.placeDataService.setPlaceData(place);
+          this.placeDataService.placeData.subscribe(value => {
+            const placeName = value.name;
+            const placeRegion = value.address_components[value.address_components.length - 2].long_name;
+            const placeCountry = value.address_components[value.address_components.length - 1].long_name;
+            this.placeService.form.get('placeName').setValue(placeName);
+            this.placeService.form.get('placeRegion').setValue(placeRegion);
+            this.placeService.form.get('placeCountry').setValue(placeCountry);
+            this.searchElementRef.nativeElement.value='';
+            this.placesphotoService.query = placeName;
+          });
         });
       });
     });

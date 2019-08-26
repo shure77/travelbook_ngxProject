@@ -3,6 +3,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { MapsAPILoader } from '@agm/core';
 import { PlaceDataService } from '@app/shared/placeData.service';
 import { PlacesService } from '@app/places.service';
+import { PlacesphotoService } from '@app/placesphoto.service';
+import { map, tap, flatMap, mergeAll } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-place',
@@ -15,13 +17,16 @@ export class CreatePlaceComponent implements OnInit {
   placeCountry: string;
   placeRegion: string;
   placeVisited: string;
+  placePhotos: string[];
+  placePhotosTest = ['a', 'b', 'c'];
 
   constructor(
     public dialogRef: MatDialogRef<CreatePlaceComponent>,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
     private placeDataService: PlaceDataService,
-    private placeService: PlacesService
+    private placeService: PlacesService,
+    private placesphotoService: PlacesphotoService
   ) {}
 
   ngOnInit() {
@@ -31,6 +36,7 @@ export class CreatePlaceComponent implements OnInit {
         this.ngZone.run(() => {
           // get the place result
           const place: google.maps.places.PlaceResult = autocomplete.getPlace();
+          this.placesphotoService.query = this.placeName;
 
           // verify result
           if (place.geometry === undefined || place.geometry === null) {
@@ -45,9 +51,16 @@ export class CreatePlaceComponent implements OnInit {
             this.placeService.form.get('placeName').setValue(this.placeName);
             this.placeService.form.get('placeRegion').setValue(this.placeRegion);
             this.placeService.form.get('placeCountry').setValue(this.placeCountry);
+            if (this.placesphotoService.query !== '' ){
+            this.getPlacephoto();
+            console.log(this.placePhotos);
+          }
           });
         });
       });
+      if (this.placesphotoService.query !== '' ){
+      this.getPlacephoto();
+    }
     });
   }
 
@@ -63,5 +76,15 @@ export class CreatePlaceComponent implements OnInit {
 
   onClear() {
     this.searchElementRef.nativeElement.value = '';
+  }
+
+  getPlacephoto(){
+    this.placesphotoService.getPlacephoto().pipe(
+      map (value => value.results.map((el:any) => el.urls.thumb)),
+      //map (element => this.placePhotos.push(element)) 
+    )
+    .subscribe(
+      (pictureUrl) => this.placePhotos = pictureUrl
+    )
   }
 }
