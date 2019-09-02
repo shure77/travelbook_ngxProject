@@ -52,6 +52,7 @@ export class CreatePlaceComponent implements OnInit {
             this.placeService.form.get('placeRegion').setValue(this.placeRegion);
             this.placeService.form.get('placeCountry').setValue(this.placeCountry);
             if (this.placesphotoService.query !== '' ){
+              this.placesphotoService.query = this.placeName;
             this.getPlacephoto();
             console.log(this.placePhotos);
           }
@@ -80,8 +81,8 @@ export class CreatePlaceComponent implements OnInit {
 
   getPlacephoto(){
     this.placesphotoService.getPlacephoto().pipe(
-      map (value => value.results.map((el:any) => el.urls.thumb)),
-      //map (element => this.placePhotos.push(element)) 
+      tap ((element) => console.log(element)),
+      map (value => value.results.map((el:any) => ({pictureUrl: el.urls.small, pictureText: el.description })))
     )
     .subscribe(
       (pictureUrl) => this.placePhotos = pictureUrl

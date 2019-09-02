@@ -39,18 +39,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    this.isLoading = true;
-    this.quoteService
-      .getRandomQuote({ category: 'dev' })
-      .pipe(
-        finalize(() => {
-          this.isLoading = false;
-        })
-      )
-      .subscribe((quote: string) => {
-        this.quote = quote;
-      });
-          // setup subscription to detect the kind of device
+    // setup subscription to detect the kind of device
     this.observersubscription = this.breakpointobserver
     .observe([Breakpoints.Small, Breakpoints.Handset])
     .subscribe((result: BreakpointState) => {

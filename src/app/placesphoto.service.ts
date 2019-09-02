@@ -13,6 +13,6 @@ export class PlacesphotoService {
   constructor(private http: HttpClient) { }
 
   getPlacephoto(): Observable<any> {
-    return this.http.get('https://api.unsplash.com/search/photos?page=1&per_page=3&query=' + this.query + '&client_id=' + this.apikeyUsplash);
+    return this.http.get('https://api.unsplash.com/search/photos?page=1&per_page=3&orientation=landscape&query=' + this.query + '&client_id=' + this.apikeyUsplash);
   }
 }

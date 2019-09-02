@@ -16,6 +16,9 @@ mat-card {
 
   .mat-card-title {
     color: mat-color($app-primary);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   .mat-card-content {
@@ -24,6 +27,7 @@ mat-card {
       margin-bottom: 5px;
       font-size: 18px;
       font-weight: 300;
+      white-space: nowrap;
     }
   }
 

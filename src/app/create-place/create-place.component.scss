@@ -17,3 +17,14 @@
 .mat-toolbar {
     h1 { color: #ffffff;}
 }
+
+.placeImage {
+    min-height: 17vh;
+    max-height: 17vh;
+    max-width: 19vh;
+    object-fit: cover;
+}
+
+::ng-deep .mat-dialog-container {
+    max-height: 95vh;
+}
