@@ -1,30 +1,34 @@
 .createplace-form {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .btn-dialog-close {
-    width: 45px;
-    min-width: 0px !important;
-    height: 40px;
-    padding: 0px !important;
+  width: 45px;
+  min-width: 0px !important;
+  height: 40px;
+  padding: 0px !important;
 }
 
 .button-row {
-    float: right;
-    button { margin-left: 5px;}
+  float: right;
+  button {
+    margin-left: 5px;
+  }
 }
 
 .mat-toolbar {
-    h1 { color: #ffffff;}
+  h1 {
+    color: #ffffff;
+  }
 }
 
 .placeImage {
-    min-height: 17vh;
-    max-height: 17vh;
-    max-width: 19vh;
-    object-fit: cover;
+  min-height: 17vh;
+  max-height: 17vh;
+  max-width: 19vh;
+  object-fit: cover;
 }
 
 ::ng-deep .mat-dialog-container {
-    max-height: 95vh;
+  max-height: 95vh;
 }

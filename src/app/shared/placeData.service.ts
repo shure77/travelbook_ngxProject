@@ -1,17 +1,14 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class PlaceDataService {
-    
-    public placeData = new BehaviorSubject<any>('');
+  public placeData = new BehaviorSubject<any>('');
 
-    constructor() {}
+  constructor() {}
 
-    
-
-    setPlaceData(placeData: any) {
-        this.placeData.next(placeData);
-    }
+  setPlaceData(placeData: any) {
+    this.placeData.next(placeData);
+  }
 }

@@ -3,13 +3,12 @@ import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class SearchDataService {
-    
-    private searchDataSource = new BehaviorSubject('');
-    currentSearchData = this.searchDataSource.asObservable();
+  private searchDataSource = new BehaviorSubject('');
+  currentSearchData = this.searchDataSource.asObservable();
 
-    constructor() {}
+  constructor() {}
 
-    changeSearchData(searchData: string) {
-        this.searchDataSource.next(searchData);
-    }
+  changeSearchData(searchData: string) {
+    this.searchDataSource.next(searchData);
+  }
 }

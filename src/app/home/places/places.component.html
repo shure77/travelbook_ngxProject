@@ -1,23 +1,26 @@
 <div class="mdc-layout-grid__inner">
-<div class=" 
+  <div
+    class=" 
 mdc-layout-grid__cell--span-4-desktop
 mdc-layout-grid__cell--span-4-tablet
-mdc-layout-grid__cell--span-4-phone container" *ngFor="let place of places | filter : searchText;" >
-<mat-card class="example-card">
-  <mat-card-header>
-    <div mat-card class="example-header-image"></div>
-    <mat-card-title>{{ place.placeName}}</mat-card-title>
-    <mat-card-subtitle>{{ place.placeRegion }}, {{ place.placeCountry }}</mat-card-subtitle>
-  </mat-card-header>
-  <img mat-card-image src="{{ place.placeImageUrl }}" alt="{{ place.placeName }}" />
-  <mat-card-content>
-    <p>{{ place.placeName }}</p>
-    <p>{{ place.placeVisited | date:'MMMM, y' }}</p>
-  </mat-card-content>
-  <mat-card-actions>
-      <button mat-button (click)="onDelete(place.$key)" id="{{place.$key}}">DELETE</button>
-    <button mat-button>VIEW</button>
-  </mat-card-actions>
-</mat-card>
-</div>
+mdc-layout-grid__cell--span-4-phone container"
+    *ngFor="let place of places | filter: searchText"
+  >
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card class="example-header-image"></div>
+        <mat-card-title>{{ place.placeName }}</mat-card-title>
+        <mat-card-subtitle>{{ place.placeRegion }}, {{ place.placeCountry }}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="{{ place.placeImageUrl }}" alt="{{ place.placeName }}" />
+      <mat-card-content>
+        <p>{{ place.placeName }}</p>
+        <p>{{ place.placeVisited | date: 'MMMM, y' }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="onDelete(place.$key)" id="{{ place.$key }}">DELETE</button>
+        <button mat-button>VIEW</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>

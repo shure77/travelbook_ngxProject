@@ -18,18 +18,19 @@ export class PlacesComponent implements OnInit, OnDestroy {
   constructor(private placesService: PlacesService, private searchTextService: SearchDataService) {}
 
   ngOnInit() {
-    this.placesService.getPlacesFb()
+    this.placesService
+      .getPlacesFb()
       .pipe(
-        map(list => list.map((val) => ({$key: val.key, ...val.payload.val()}))), // create objects from firebaseList
-        map(unsortedList => unsortedList.sort(
-          (a,b) => {
+        map(list => list.map(val => ({ $key: val.key, ...val.payload.val() }))), // create objects from firebaseList
+        map(unsortedList =>
+          unsortedList.sort((a, b) => {
             const c = new Date(a.placeVisited).getTime();
             const d = new Date(b.placeVisited).getTime();
             return d - c;
-          }
-        )) // sort the list by time visited
-        )
-      .subscribe(sortedList => this.places = sortedList);
+          })
+        ) // sort the list by time visited
+      )
+      .subscribe(sortedList => (this.places = sortedList));
     this.subscription = this.searchTextService.currentSearchData.subscribe(
       searchText => (this.searchText = searchText)
     );
@@ -39,7 +40,7 @@ export class PlacesComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe;
   }
 
-  onDelete($key: any){
+  onDelete($key: any) {
     this.placesService.deletePlace($key);
   }
 }

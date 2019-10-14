@@ -55,13 +55,13 @@ fdescribe('HomeComponent', () => {
 
   it('should contain app-places directive', () => {
     const appPlaces = elements.querySelector('app-places');
-    
+
     expect(appPlaces).toBeTruthy();
   });
 
   it('should render add button', () => {
     const addButton = elements.querySelector('button');
-    
+
     expect(addButton).toBeTruthy();
   });
 
@@ -71,7 +71,7 @@ fdescribe('HomeComponent', () => {
 
     fixture.detectChanges();
     const createPlaceForm = elements.querySelector('.createPlaceForm');
-    
+
     console.log(createPlaceForm);
-  })
+  });
 });

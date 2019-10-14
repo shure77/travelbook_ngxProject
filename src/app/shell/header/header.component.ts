@@ -16,7 +16,7 @@ import { SearchDataService } from '@app/shared/searchData.service';
 export class HeaderComponent implements OnInit, OnChanges {
   @Input() sidenav!: MatSidenav;
   searchText: string;
-  @ViewChild('searchInput', {static: false}) searchInput: ElementRef;
+  @ViewChild('searchInput', { static: false }) searchInput: ElementRef;
 
   isMobile: boolean;
   observerSubscription: Subscription;
@@ -41,8 +41,7 @@ export class HeaderComponent implements OnInit, OnChanges {
       });
   }
 
-  ngOnChanges() {
-  }
+  ngOnChanges() {}
 
   setLanguage(language: string) {
     this.i18nService.language = language;
@@ -69,15 +68,15 @@ export class HeaderComponent implements OnInit, OnChanges {
     return this.titleService.getTitle();
   }
 
-  triggerSearchbarOn(){
+  triggerSearchbarOn() {
     this.searchBarVisible = !this.searchBarVisible;
-    this.displayStyle = 'block';    
+    this.displayStyle = 'block';
   }
 
-  triggerSearchbarOff(){
+  triggerSearchbarOff() {
     this.searchInput.nativeElement.value = '';
     this.searchBarVisible = !this.searchBarVisible;
-    this.displayStyle = 'none';  
+    this.displayStyle = 'none';
     this.searchData.changeSearchData('');
   }
 

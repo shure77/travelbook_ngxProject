@@ -12,6 +12,7 @@ import { HomeComponent } from './home.component';
 import { PlacesComponent } from './places/places.component';
 import { FilterPipe } from '@app/filter.pipe';
 
+
 @NgModule({
   imports: [
     CommonModule,

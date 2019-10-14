@@ -6,10 +6,13 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { RouteReusableStrategy } from './route-reusable-strategy';
 import { HttpService } from './http/http.service';
+import { PlacesResolver } from '@app/core/route-resolver/places.resolver';
+import { StoreModule } from '@app/core/store/store.module';
 
 @NgModule({
-  imports: [CommonModule, HttpClientModule, TranslateModule, RouterModule],
+  imports: [CommonModule, HttpClientModule, TranslateModule, RouterModule, StoreModule],
   providers: [
+    PlacesResolver,
     {
       provide: HttpClient,
       useClass: HttpService

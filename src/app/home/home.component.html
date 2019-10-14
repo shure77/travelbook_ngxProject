@@ -2,8 +2,8 @@
   <div class="mdc-layout-grid__inner">
     <div *ngIf="!isMobile" class="mdc-layout-grid__cell--span-12">
       <div class="container">
-          <h1 class="appTitle" >Travelbook</h1>
-        </div>
+        <h1 class="appTitle">Travelbook</h1>
+      </div>
     </div>
   </div>
   <div class="mdc-layout-grid__inner">
@@ -32,13 +32,7 @@
   <div class="mdc-layout-grid__inner">
     <div *ngIf="isMobile" class="mdc-layout-grid__cell--span-12">
       <div class="container">
-        <button
-          class="addCityButton"
-          mat-fab
-          raised
-          aria-label="add city button"
-          (click)="openCreateDialog()"
-        >
+        <button class="addCityButton" mat-fab raised aria-label="add city button" (click)="openCreateDialog()">
           <mat-icon>add</mat-icon>
         </button>
       </div>

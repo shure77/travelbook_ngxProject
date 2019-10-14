@@ -7,17 +7,16 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   providedIn: 'root'
 })
 export class PlacesService {
-
   placesList: AngularFireList<any>;
 
   form: FormGroup = new FormGroup({
     $key: new FormControl(null),
-    placeName: new FormControl("", Validators.required),
-    placeRegion: new FormControl(""),
-    placeCountry: new FormControl("", Validators.required),
-    placeVisited: new FormControl(""),
-    placeImageUrl: new FormControl(""),
-    placeNotes: new FormControl("")
+    placeName: new FormControl('', Validators.required),
+    placeRegion: new FormControl(''),
+    placeCountry: new FormControl('', Validators.required),
+    placeVisited: new FormControl(''),
+    placeImageUrl: new FormControl(''),
+    placeNotes: new FormControl('')
   });
 
   initializeForm() {
@@ -29,11 +28,10 @@ export class PlacesService {
       placeVisited: '',
       placeImageUrl: '',
       placeNotes: ''
-    }
-    )
+    });
   }
 
-  constructor(private firebase: AngularFireDatabase) { }
+  constructor(private firebase: AngularFireDatabase) {}
 
   getPlacesFb() {
     this.placesList = this.firebase.list('places');
@@ -45,14 +43,14 @@ export class PlacesService {
       placeName: place.placeName,
       placeRegion: place.placeRegion,
       placeCountry: place.placeCountry,
-      placeVisited: place.placeVisited.toString() ,
+      placeVisited: place.placeVisited.toString(),
       placeImageUrl: place.placeImageUrl,
       placeNotes: place.placeNotes
     });
   }
 
   // updatePlace(place: any) {
-  //   this.placesList.update(place.$key, 
+  //   this.placesList.update(place.$key,
   //     {
   //     placeName: place.placeName,
   //     placeRegion: place.placeRegion,

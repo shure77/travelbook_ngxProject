@@ -5,6 +5,8 @@ import { PlaceDataService } from '@app/shared/placeData.service';
 import { PlacesService } from '@app/places.service';
 import { PlacesphotoService } from '@app/placesphoto.service';
 import { map, tap, flatMap, mergeAll } from 'rxjs/operators';
+import { Store } from '@ngxs/store';
+import { AddPlace } from '@app/core/store/actions/place.action';
 
 @Component({
   selector: 'app-create-place',
@@ -26,7 +28,8 @@ export class CreatePlaceComponent implements OnInit {
     private ngZone: NgZone,
     private placeDataService: PlaceDataService,
     private placeService: PlacesService,
-    private placesphotoService: PlacesphotoService
+    private placesphotoService: PlacesphotoService,
+    private store: Store
   ) {}
 
   ngOnInit() {
@@ -51,17 +54,17 @@ export class CreatePlaceComponent implements OnInit {
             this.placeService.form.get('placeName').setValue(this.placeName);
             this.placeService.form.get('placeRegion').setValue(this.placeRegion);
             this.placeService.form.get('placeCountry').setValue(this.placeCountry);
-            if (this.placesphotoService.query !== '' ){
+            if (this.placesphotoService.query !== '') {
               this.placesphotoService.query = this.placeName;
-            this.getPlacephoto();
-            console.log(this.placePhotos);
-          }
+              this.getPlacephoto();
+              console.log(this.placePhotos);
+            }
           });
         });
       });
-      if (this.placesphotoService.query !== '' ){
-      this.getPlacephoto();
-    }
+      if (this.placesphotoService.query !== '') {
+        this.getPlacephoto();
+      }
     });
   }
 
@@ -70,6 +73,7 @@ export class CreatePlaceComponent implements OnInit {
   }
 
   onSubmit() {
+    this.addPlaceToStore();
     this.placeService.insertPlace(this.placeService.form.value);
     this.placeService.form.reset();
     this.onClose();
@@ -79,13 +83,17 @@ export class CreatePlaceComponent implements OnInit {
     this.searchElementRef.nativeElement.value = '';
   }
 
-  getPlacephoto(){
-    this.placesphotoService.getPlacephoto().pipe(
-      tap ((element) => console.log(element)),
-      map (value => value.results.map((el:any) => ({pictureUrl: el.urls.small, pictureText: el.description })))
-    )
-    .subscribe(
-      (pictureUrl) => this.placePhotos = pictureUrl
-    )
+  getPlacephoto() {
+    this.placesphotoService
+      .getPlacephoto()
+      .pipe(
+        tap(element => console.log(element)),
+        map(value => value.results.map((el: any) => ({ pictureUrl: el.urls.small, pictureText: el.description })))
+      )
+      .subscribe(pictureUrl => (this.placePhotos = pictureUrl));
+  }
+
+  addPlaceToStore() {
+    this.store.dispatch(new AddPlace(this.placeService.form.value));
   }
 }

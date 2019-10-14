@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, NgZone, AfterViewInit } from '@angular/core';
-import { finalize } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 import { QuoteService } from './quote.service';
@@ -18,7 +17,7 @@ import { PlacesphotoService } from '@app/placesphoto.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
-@ViewChild('search', { static: false }) public searchElementRef: ElementRef; // get the DOM input element for autocomplete
+  @ViewChild('search', { static: false }) public searchElementRef: ElementRef; // get the DOM input element for autocomplete
 
   quote: string | undefined;
   isLoading = false;
@@ -41,10 +40,10 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {
     // setup subscription to detect the kind of device
     this.observersubscription = this.breakpointobserver
-    .observe([Breakpoints.Small, Breakpoints.Handset])
-    .subscribe((result: BreakpointState) => {
-      this.isMobile = result.matches;
-    });
+      .observe([Breakpoints.Small, Breakpoints.Handset])
+      .subscribe((result: BreakpointState) => {
+        this.isMobile = result.matches;
+      });
   }
 
   ngAfterViewInit() {
@@ -70,7 +69,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
             this.placeService.form.get('placeName').setValue(placeName);
             this.placeService.form.get('placeRegion').setValue(placeRegion);
             this.placeService.form.get('placeCountry').setValue(placeCountry);
-            this.searchElementRef.nativeElement.value='';
+            this.searchElementRef.nativeElement.value = '';
             this.placesphotoService.query = placeName;
           });
         });
@@ -82,12 +81,12 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.observersubscription.unsubscribe;
   }
 
-  openCreateDialog(){
-    const dialogConfig = new MatDialogConfig;
+  openCreateDialog() {
+    const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '80%';
-    dialogConfig.position = {'top': '2%'};
+    dialogConfig.position = { top: '2%' };
     this.dialog.open(CreatePlaceComponent, dialogConfig);
   }
 }
