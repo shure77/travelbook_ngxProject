@@ -12,6 +12,12 @@ export class AddPlace {
   constructor(public payload: Place) {}
 }
 
+export class DeletePlace {
+  static readonly type ='[Place] Delete';
+
+  constructor(public id: string) {}
+}
+
 export class LoadPlaces {
   static readonly type='[Place] Load Places';
 

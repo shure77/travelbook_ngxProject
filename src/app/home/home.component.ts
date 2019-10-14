@@ -10,6 +10,8 @@ import { CreatePlaceComponent } from '@app/create-place/create-place.component';
 import { PlacesService } from '@app/places.service';
 import { PlaceDataService } from '@app/shared/placeData.service';
 import { PlacesphotoService } from '@app/placesphoto.service';
+import { ActivatedRoute } from '@angular/router';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -34,7 +36,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     private dialog: MatDialog,
     private placeDataService: PlaceDataService,
     private placeService: PlacesService,
-    private placesphotoService: PlacesphotoService
+    private placesphotoService: PlacesphotoService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {

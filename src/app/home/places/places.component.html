@@ -1,10 +1,10 @@
 <div class="mdc-layout-grid__inner">
   <div
-    class=" 
+    class="
 mdc-layout-grid__cell--span-4-desktop
 mdc-layout-grid__cell--span-4-tablet
 mdc-layout-grid__cell--span-4-phone container"
-    *ngFor="let place of places | filter: searchText"
+    *ngFor="let place of places$ | async | filter: searchText"
   >
     <mat-card class="example-card">
       <mat-card-header>

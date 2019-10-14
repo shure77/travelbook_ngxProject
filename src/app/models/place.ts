@@ -1,4 +1,5 @@
 export class Place {
+  public $key?: string;
   public placeName: string;
   public placeRegion: string;
   public placeCountry: string;

@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Place } from './models/place';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { PlaceState, PlaceStateModel } from '@app/core/store/state/place.state';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -63,5 +66,7 @@ export class PlacesService {
 
   deletePlace($key: string) {
     this.placesList.remove($key);
+    return this.placesList.snapshotChanges();
   }
+
 }
